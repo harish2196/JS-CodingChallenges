@@ -1,0 +1,68 @@
+1. Find the Total Sales for Each Product
+
+SELECT product_id, SUM(sales_amount) AS TotalSales
+FROM sales
+GROUP BY product_id;
+
+2.List Employees Hired in the Last 30 Days
+
+SELECT *
+FROM employees
+WHERE hire_date >= CURRENT_DATE - INTERVAL '30 DAY';
+
+3.Retrieve the Top 3 Most Expensive Products
+
+SELECT product_id, product_name, price
+FROM products
+ORDER BY price DESC
+LIMIT 3;
+
+4.Find Average Salary by Department
+
+SELECT department_id, AVG(salary) AS AverageSalary
+FROM employees
+GROUP BY department_id;
+
+5.Find Total Sales and Average Sales Per Month
+
+SELECT DATE_TRUNC('month', sale_date) AS Month, SUM(sales_amount) AS TotalSales, AVG(sales_amount) AS AverageSales
+FROM sales
+GROUP BY DATE_TRUNC('month', sale_date);
+
+6.Delete Records Older Than a Specific Date
+
+DELETE FROM logs
+WHERE log_date < '2025-01-01';
+
+7.Find Products with Low Stock
+
+SELECT product_id, product_name, stock_quantity
+FROM products
+WHERE stock_quantity < 10;
+
+8.Find Duplicate Email Addresses in a Users Table
+
+SELECT email, COUNT(*)
+FROM users
+GROUP BY email
+HAVING COUNT(*) > 1;
+
+9. Find the Number of Orders per Customer in the Last Year
+
+SELECT customer_id, COUNT(*) AS OrderCount
+FROM orders
+WHERE order_date >= CURRENT_DATE - INTERVAL '1 YEAR'
+GROUP BY customer_id;
+
+10.Find Orders with Missing Shipping Information
+
+SELECT order_id, customer_id
+FROM orders
+WHERE shipping_address IS NULL;
+
+11. List Customers Who Have Placed Orders More Than Once
+
+SELECT customer_id
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(*) > 1;
